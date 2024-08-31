@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 5246869269887926946}
   - component: {fileID: 5025810894333612269}
   - component: {fileID: 2695902416171504299}
-  - component: {fileID: 8549762451960967655}
   - component: {fileID: 3188007053768514784}
   m_Layer: 0
   m_Name: Player
@@ -194,20 +193,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8549762451960967655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2527671363284184175}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86ce4611c1de58f45b2d2c1657848cf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 4
-  _jumpForce: 5
 --- !u!114 &3188007053768514784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +214,8 @@ MonoBehaviour:
   _isGrounded: 0
   CoyoteTime: 0.2
   _coyoteCounter: 0
+  JumpBufferLength: 0.2
+  _jumpBufferCount: 0
 --- !u!1 &7350130667353202599
 GameObject:
   m_ObjectHideFlags: 0

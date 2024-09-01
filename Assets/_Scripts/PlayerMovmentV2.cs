@@ -11,10 +11,14 @@ public class PlayerMovmentV2 : MonoBehaviour
     [SerializeField] private float JumpForce = 15f;
 
     [Header("Speed Settings")]
-    [SerializeField] [Tooltip("Base speed before accumulating")] private float BaseSpeed = 4f;
-    [SerializeField] [Tooltip("Maximum speed player can reach")] private float MaxSpeed = 10f;
-    [SerializeField] [Tooltip("Time to reach max speed")] private float AccelerationTime = 2f;
-    [SerializeField] [Tooltip("Max fall speed")] private float MaxFallSpeed = -75f;
+    [SerializeField] [Tooltip("Base speed before accumulating")] 
+    private float BaseSpeed = 4f;
+    [SerializeField] [Tooltip("Maximum speed player can reach")] 
+    private float MaxSpeed = 10f;
+    [SerializeField] [Tooltip("Time to reach max speed")] 
+    private float AccelerationTime = 2f;
+    [SerializeField] [Tooltip("Max fall speed")] 
+    private float MaxFallSpeed = -75f;
 
     private Rigidbody2D _rb;
 
@@ -24,8 +28,12 @@ public class PlayerMovmentV2 : MonoBehaviour
     public Transform RightWallCheckPoint;
 
     [Header("Layers")]
+    [Tooltip("List of Layers that allowes jumping.")] 
     public LayerMask AllowJumpMask;
+    [Tooltip("List of Layers that allowes wall jumping.")] 
     public LayerMask AllowWallJumpMask;
+    [Tooltip("List of Layers speed amplification values. 1.5 increases the max speed 50%")] 
+    public List<AmplifyLayer> AmplifyLayers;
 
     [Header("Player State")]
     [SerializeField] private bool _isGrounded;
@@ -64,18 +72,23 @@ public class PlayerMovmentV2 : MonoBehaviour
         _isGrounded = Physics2D.OverlapCircle(GroundCheckPoint.position, 1f, AllowJumpMask);
         _isWalled = Physics2D.OverlapCircle(LeftWallCheckPoint.position, 1f, AllowWallJumpMask) || Physics2D.OverlapCircle(RightWallCheckPoint.position, 1f, AllowWallJumpMask);
 
+        // Set Current Speed
         if (_isGrounded && _isWalled) {
             _currentSpeed = BaseSpeed;
         } else if (Input.GetAxisRaw("Horizontal") != 0 && !_isWallJumping) {
             //Accumelating Speed
             _currentSpeed += _accelerationRate * Time.deltaTime;  // Gradually increase speed
-            _currentSpeed = Mathf.Clamp(_currentSpeed, BaseSpeed, MaxSpeed);  // Clamp speed to max speed
+            _currentSpeed = Mathf.Clamp(_currentSpeed, BaseSpeed, MaxSpeed * GetAmplifyValue());  // Clamp speed to max speed
+
         } else {
             _currentSpeed = BaseSpeed;  // Reset to base speed when not moving
         }
+
+        // Applyiing velocity
         if (!_isWallJumping) {
             _rb.velocity = new Vector2(Mathf.Lerp(_rb.velocity.x, Input.GetAxisRaw("Horizontal") * _currentSpeed, 0.2f), _rb.velocity.y);
         }
+
         //CoyoteTime
         if (_isGrounded) {
             _coyoteCounter = CoyoteTime;
@@ -131,4 +144,19 @@ public class PlayerMovmentV2 : MonoBehaviour
     private void ResetWallJumping() {
         _isWallJumping = false;
     }
+
+    private float GetAmplifyValue() {
+        Collider2D collider = Physics2D.OverlapCircle(GroundCheckPoint.position, 1f, ~(1 << 0)); // ~(1 << 0) ignores the Default layer.
+        if (collider != null) {
+            //Debug.Log($"Detected collider on layer: {LayerMask.LayerToName(collider.gameObject.layer)}");
+            foreach (var layerValuePair in AmplifyLayers) { //Todo, expansiv for loop, maby use dictionary?
+                // Check if the collider's layer is included in the LayerMask
+                if ((layerValuePair.Layer.value & (1 << collider.gameObject.layer)) != 0) {
+                    return layerValuePair.Value;
+                }
+            }
+        }
+        return 1f; // Default value
+    }
+
 }

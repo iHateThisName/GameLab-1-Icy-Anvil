@@ -1,16 +1,15 @@
-nityusing System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using system;
 
 public class TimerScript : MonoBehaviour
 {
 
     public float time;
     public bool timerIsRunning = false;
-    public Text timerText;
-    private float currentTime = 0;
+    public TextMeshProUGUI timerText;
+    private float _currentTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +21,8 @@ public class TimerScript : MonoBehaviour
     void Update()
     {
         if (timerIsRunning) {
-            currentTime = currentTime + Time.deltaTime;
+            _currentTime = _currentTime + Time.deltaTime;
         }
-        timerText = currentTime.ToString();
+        timerText.text = _currentTime.ToString();
     }
 }

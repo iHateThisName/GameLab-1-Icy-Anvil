@@ -78,7 +78,14 @@ public class PlayerMovmentV2 : MonoBehaviour
         } else if (Input.GetAxisRaw("Horizontal") != 0 && !_isWallJumping) {
             //Accumelating Speed
             _currentSpeed += _accelerationRate * Time.deltaTime;  // Gradually increase speed
-            _currentSpeed = Mathf.Clamp(_currentSpeed, BaseSpeed, MaxSpeed * GetAmplifyValue());  // Clamp speed to max speed
+
+            float amplyfiedMaxSpeed = MaxSpeed * GetAmplifyValue();
+
+            // If the current speed exceeds the max speed, smoothly transition it down
+            if (_currentSpeed > amplyfiedMaxSpeed) {
+                _currentSpeed = Mathf.Lerp(_currentSpeed, amplyfiedMaxSpeed, 0.2f);
+            }
+            _currentSpeed = Mathf.Clamp(_currentSpeed, BaseSpeed, amplyfiedMaxSpeed);
 
         } else {
             _currentSpeed = BaseSpeed;  // Reset to base speed when not moving

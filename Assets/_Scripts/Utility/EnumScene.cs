@@ -4,5 +4,6 @@ using UnityEngine;
 
 public enum EnumScene
 {
-    SimpleLevelScene = 1
+    MainMenu = 0,
+    SimpleLevelScene = 1,
 }

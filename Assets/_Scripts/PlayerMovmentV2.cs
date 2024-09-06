@@ -69,8 +69,8 @@ public class PlayerMovmentV2 : MonoBehaviour
     }
 
     private void Update() {
-        _isGrounded = Physics2D.OverlapCircle(GroundCheckPoint.position, 1f, AllowJumpMask);
-        _isWalled = Physics2D.OverlapCircle(LeftWallCheckPoint.position, 1f, AllowWallJumpMask) || Physics2D.OverlapCircle(RightWallCheckPoint.position, 1f, AllowWallJumpMask);
+        _isGrounded = Physics2D.OverlapCircle(GroundCheckPoint.position, 0.1f, AllowJumpMask);
+        _isWalled = Physics2D.OverlapCircle(LeftWallCheckPoint.position, 0.2f, AllowWallJumpMask) || Physics2D.OverlapCircle(RightWallCheckPoint.position, 0.2f, AllowWallJumpMask);
 
         // Set Current Speed
         if (_isGrounded && _isWalled) {
@@ -128,7 +128,7 @@ public class PlayerMovmentV2 : MonoBehaviour
             _currentSpeed = BaseSpeed;
 
             // Determine the direction based on which wall the player is on
-            float wallDirection = Physics2D.OverlapCircle(LeftWallCheckPoint.position, 1f, AllowWallJumpMask) ? 1 : -1; //TODO, Check is happening twice
+            float wallDirection = Physics2D.OverlapCircle(LeftWallCheckPoint.position, .2f, AllowWallJumpMask) ? 1 : -1; //TODO, Check is happening twice
 
             _rb.velocity = new Vector2(wallDirection * WallJumpDirection.x * WallJumpForce,
                                        WallJumpDirection.y * WallJumpForce);
@@ -153,7 +153,7 @@ public class PlayerMovmentV2 : MonoBehaviour
     }
 
     private float GetAmplifyValue() {
-        Collider2D collider = Physics2D.OverlapCircle(GroundCheckPoint.position, 1f, ~(1 << 0)); // ~(1 << 0) ignores the Default layer.
+        Collider2D collider = Physics2D.OverlapCircle(GroundCheckPoint.position, .2f, ~(1 << 0)); // ~(1 << 0) ignores the Default layer.
         if (collider != null) {
             //Debug.Log($"Detected collider on layer: {LayerMask.LayerToName(collider.gameObject.layer)}");
             foreach (var layerValuePair in AmplifyLayers) { //Todo, expansiv for loop, maby use dictionary?

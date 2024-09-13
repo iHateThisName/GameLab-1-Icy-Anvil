@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1299990815857558895}
   - component: {fileID: 7220822559436582132}
   - component: {fileID: 8711572960750818749}
-  - component: {fileID: 8651427030360369014}
+  - component: {fileID: 1937139710631617056}
   m_Layer: 0
   m_Name: PlayerV3
   m_TagString: Player
@@ -148,9 +148,10 @@ MonoBehaviour:
   JumpBufferLength: 0.2
   _jumpBufferCount: -1
   WallJumpForce: 15
-  WallJumpDirection: {x: 1, y: 1.5}
+  WallJumpDirection: {x: 0.8, y: 1.5}
   WallSlideSpeed: 2
---- !u!114 &8651427030360369014
+  _timerScript: {fileID: 1937139710631617056}
+--- !u!114 &1937139710631617056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,10 +160,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 199514024501133918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 844116fd2fce7ee4187924e22fb562cc, type: 3}
+  m_Script: {fileID: 11500000, guid: f3ba39a68c5207f42832a97bdb4a3d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedText: {fileID: 0}
+  _rigidbody: {fileID: 7220822559436582132}
 --- !u!1 &2107162660084143030
 GameObject:
   m_ObjectHideFlags: 0

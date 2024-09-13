@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private void Awake() {
         if (Instance == null) {
             Instance = this;
+            transform.SetParent(null);
             DontDestroyOnLoad(gameObject);
         } else {
             Destroy(gameObject);
@@ -35,6 +36,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void Respawn() {
+        if (_cinemachineCamera == null) GetFollowCameraInScene();
+
         if (!LastCheckPointPosition.HasValue) {
             GameObject go = Instantiate(_playerPrefab, _levelStartPosition, Quaternion.identity);
             _cinemachineCamera.Follow = go.transform;
@@ -51,6 +54,11 @@ public class GameManager : MonoBehaviour
             Destroy(player);
             Respawn();
         }
+    }
+
+    private void GetFollowCameraInScene() {
+        GameObject camera = GameObject.FindWithTag("PlayerFollowCamera");
+        if (camera != null) _cinemachineCamera = camera.GetComponent<CinemachineVirtualCamera>();
     }
 
 }

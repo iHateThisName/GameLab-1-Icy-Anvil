@@ -8,6 +8,8 @@ TagManager:
   - Death
   - Goal
   - Start
+  - PlayerFollowCamera
+  - TimerText
   layers:
   - Default
   - TransparentFX

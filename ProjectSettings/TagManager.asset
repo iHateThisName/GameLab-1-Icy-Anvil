@@ -9,6 +9,7 @@ TagManager:
   - Goal
   - Start
   - PlayerFollowCamera
+  - TimerText
   layers:
   - Default
   - TransparentFX

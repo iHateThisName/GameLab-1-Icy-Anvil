@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeathScript : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.CompareTag("Player")) {
+        if (other.gameObject.CompareTag("Player") && !GameManager.Instance.IsPlayerDead) {
             GameManager.Instance.Death(other.gameObject);
         }
     }

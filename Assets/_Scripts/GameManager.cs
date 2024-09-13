@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private Vector2 _levelStartPosition;
     public Vector2? LastCheckPointPosition;
 
+    private bool _isPlayerDead = false;
+
     [SerializeField] private CinemachineVirtualCamera _cinemachineCamera;
 
     private void Awake() {
@@ -41,11 +43,16 @@ public class GameManager : MonoBehaviour
             GameObject go = Instantiate(_playerPrefab, LastCheckPointPosition.Value, Quaternion.identity);
             _cinemachineCamera.Follow = go.transform;
         }
+        _isPlayerDead = false;
     }
 
     public void Death(GameObject player) {
-        Destroy(player);
-        Respawn();
+
+        if (!_isPlayerDead) {
+            _isPlayerDead = true;
+            Destroy(player);
+            Respawn();
+        }
     }
 
 }

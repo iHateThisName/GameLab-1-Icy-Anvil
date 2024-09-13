@@ -2750,16 +2750,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2839611487187999433, guid: 357b2e143d6ac274fa1f653a7d1d4cee, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2839611487187999433, guid: 357b2e143d6ac274fa1f653a7d1d4cee, type: 3}
       propertyPath: m_BackGroundColor.b
-      value: 0.19215688
+      value: 0.48627454
       objectReference: {fileID: 0}
     - target: {fileID: 2839611487187999433, guid: 357b2e143d6ac274fa1f653a7d1d4cee, type: 3}
       propertyPath: m_BackGroundColor.g
-      value: 0.4745098
+      value: 0.7803922
       objectReference: {fileID: 0}
     - target: {fileID: 2839611487187999433, guid: 357b2e143d6ac274fa1f653a7d1d4cee, type: 3}
       propertyPath: m_BackGroundColor.r
-      value: 0.22594059
+      value: 0.9333334
       objectReference: {fileID: 0}
     - target: {fileID: 4126636593682802657, guid: 357b2e143d6ac274fa1f653a7d1d4cee, type: 3}
       propertyPath: m_Name
@@ -3756,7 +3760,7 @@ Transform:
   m_GameObject: {fileID: 1687916866}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 22.9, z: 15}
+  m_LocalPosition: {x: 0.1, y: 5.9, z: 15}
   m_LocalScale: {x: 20.772425, y: 20.772425, z: 20.772425}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3792,7 +3796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9019068137995773825, guid: 28b30e9f61ba5fd45842a47e4d5191af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.912499
+      value: 12.72
       objectReference: {fileID: 0}
     - target: {fileID: 9019068137995773825, guid: 28b30e9f61ba5fd45842a47e4d5191af, type: 3}
       propertyPath: m_LocalPosition.z

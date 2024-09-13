@@ -1,28 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 using TMPro;
+using UnityEngine;
 
-public class TimerScript : MonoBehaviour
-{
+public class TimerScript : MonoBehaviour {
+    [NonSerialized] public bool IsTimerRunning = false;
+    private float _elapsedTime = 0f;
+    private TextMeshProUGUI _timerText;
+    [SerializeField] private Rigidbody2D _rigidbody;
 
-    public float time;
-    public bool timerIsRunning = false;
-    public TextMeshProUGUI timerText;
-    private float _currentTime = 0;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        timerIsRunning = true;
+    private void Start() {
+        GameObject textObject = GameObject.FindGameObjectWithTag("TimerText");
+        _timerText = textObject.GetComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (timerIsRunning) {
-            _currentTime = _currentTime + Time.deltaTime;
+    private void Update() {
+        if (_timerText != null) {
+            if (IsTimerRunning) {
+                _elapsedTime += Time.deltaTime;
+            }
+            _timerText.text = _elapsedTime.ToString("F2") + "s";
         }
-        timerText.text = _currentTime.ToString();
+    }
+
+    public void StartTimer() {
+        IsTimerRunning = true;
     }
 }

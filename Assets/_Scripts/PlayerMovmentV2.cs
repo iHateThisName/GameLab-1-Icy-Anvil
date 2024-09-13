@@ -58,6 +58,8 @@ public class PlayerMovmentV2 : MonoBehaviour
     [SerializeField] private Vector2 WallJumpDirection = new Vector2(1f, 1.5f);
     [SerializeField] private float WallSlideSpeed = 2f;
 
+    [SerializeField] private TimerScript _timerScript;
+
     private float _currentSpeed;  // The current speed that will be adjusted over time
     private float _accelerationRate;  // The rate at which the speed will increase
 
@@ -86,6 +88,9 @@ public class PlayerMovmentV2 : MonoBehaviour
                 _currentSpeed = Mathf.Lerp(_currentSpeed, amplyfiedMaxSpeed, 0.2f);
             }
             _currentSpeed = Mathf.Clamp(_currentSpeed, BaseSpeed, amplyfiedMaxSpeed);
+
+            //Start timer
+            if (!_timerScript.IsTimerRunning) _timerScript.StartTimer();
 
         } else {
             _currentSpeed = BaseSpeed;  // Reset to base speed when not moving

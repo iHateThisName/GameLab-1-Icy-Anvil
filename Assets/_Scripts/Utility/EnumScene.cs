@@ -6,4 +6,5 @@ public enum EnumScene
 {
     MainMenu = 0,
     SimpleLevelScene = 1,
+    TutorialLevelAKW = 2,
 }

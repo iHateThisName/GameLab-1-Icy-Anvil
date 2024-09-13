@@ -6,6 +6,7 @@ public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject _defaultMenu;
     [SerializeField] private GameObject _levelSelector;
+    [SerializeField] private GameObject _credits;
 
     public void ActivateLevelSelector() {
         _defaultMenu.SetActive(false);
@@ -13,6 +14,12 @@ public class MainMenuController : MonoBehaviour
     }
     public void ActivateDefaultMenu() {
         _levelSelector.SetActive(false);
+        _credits.SetActive(false);
         _defaultMenu.SetActive(true);
+    }
+
+    public void ActivateCredits() {
+        _defaultMenu.SetActive(false);
+        _credits.SetActive(true);
     }
 }

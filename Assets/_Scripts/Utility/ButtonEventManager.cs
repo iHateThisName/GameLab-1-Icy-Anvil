@@ -20,6 +20,6 @@ public class ButtonEventManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void OnStart() => GameManager.Instance.LoadScene(EnumScene.TutorialLevelAKW);
+    public void OnStart() => GameManager.Instance.LoadScene(EnumScene.Level_00);
     public void OnMainMenu() => GameManager.Instance.LoadScene(EnumScene.MainMenu);
 }
